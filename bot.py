@@ -1,20 +1,22 @@
+import asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "YOUR_BOT_TOKEN"
+TOKEN = "PASTE_YOUR_BOT_TOKEN_HERE"
 
-# /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("👋 Hello! Bot is live and working.")
+    await update.message.reply_text("👋 Bot is live!")
 
-# /help command
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Commands:\n/start - Start bot\n/help - Help info")
+    await update.message.reply_text("Commands: /start /help")
 
-# main app
-app = ApplicationBuilder().token(TOKEN).build()
+def main():
+    app = ApplicationBuilder().token(TOKEN).build()
 
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("help", help_cmd))
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("help", help_cmd))
 
-app.run_polling()
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
